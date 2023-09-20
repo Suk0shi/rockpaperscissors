@@ -40,7 +40,7 @@ function singleRound(playerSelection, computerSelection) {
         console.log("You Win! Scissors beats Paper");
     }
     else {
-        console.log("Something went wrong :3");
+        console.log("Something went wrong :3 Please enter valid choice");
     }
 }
 
