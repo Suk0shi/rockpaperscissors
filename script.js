@@ -13,42 +13,86 @@ function singleRound(playerSelection, computerSelection) {
     computerSelection = computerSelection.toLowerCase();
     
     if (playerSelection === computerSelection) {
-        console.log("Draw!");
+        
+        content.textContent = 'Draw!';
+        roundResult.appendChild(content);
+        game();
     } 
     else if (playerSelection === "rock" && computerSelection === "paper") {
         computerPoints++;
-        console.log("You Lose! Paper beats Rock");
+        
+        content.textContent = 'You Lose! Paper beats Rock';
+        roundResult.appendChild(content);
+        game();
     }
     else if (playerSelection === "rock" && computerSelection === "scissors") {
         playerPoints++;
-        console.log("You Win! Rock beats Scissors");
+        
+        content.textContent = 'You Win! Rock beats Scissors';
+        roundResult.appendChild(content);
+        game();
     }
     else if (playerSelection === "paper" && computerSelection === "rock") {
         playerPoints++;
-        console.log("You Win! Paper beats Rock");
+        
+        content.textContent = 'You Win! Paper beats Rock';
+        roundResult.appendChild(content);
+        game();
     }
     else if (playerSelection === "paper" && computerSelection === "scissors") {
         computerPoints++;
-        console.log("You Lose! Scissors beats Paper");
+        
+        content.textContent = 'You Lose! Scissors beats Paper';
+        roundResult.appendChild(content);
+        game();
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") {
         computerPoints++;
-        console.log("You Lose! Rock beats Scissors");
+        
+        content.textContent = 'You Lose! Rock beats Scissors';
+        roundResult.appendChild(content);
+        game();
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") {
         playerPoints++;
-        console.log("You Win! Scissors beats Paper");
+        
+        content.textContent = 'You Win! Scissors beats Paper';
+        roundResult.appendChild(content);
+        game();
     }
     else {
-        console.log("Something went wrong :3 Please enter valid choice");
+        content.textContent = 'Something went wrong :3 Please enter valid choice';
+        roundResult.appendChild(content);
+        game();
     }
 }
 
+const roundResult = document.querySelector('#roundResult');
+const content = document.createElement('p');
+content.classList.add('content');
 
+const rockBtn = document.querySelector("#rockBtn");
+rockBtn.addEventListener('click', () => {
+    if(playerPoints < 3 && computerPoints < 3) {
+        singleRound("rock", getComputerChoice());
+    }
+});
 
-//console.log(singleRound(playerSelection, computerSelection));
+const paperBtn = document.querySelector("#paperBtn");
+paperBtn.addEventListener('click', () => {
+    if(playerPoints < 3 && computerPoints < 3) {
+        singleRound("paper", getComputerChoice());
+    }
+});
 
+const scissorsBtn = document.querySelector("#scissorsBtn");
+scissorsBtn.addEventListener('click', () => {
+    if(playerPoints < 3 && computerPoints < 3) {
+        singleRound("scissors", getComputerChoice());
+    }
+});
 
+/*
 function game() {
     while (playerPoints < 3 && computerPoints < 3) {
         let playerSelection = prompt("Please enter Rock, Paper, or Scissors", "Choice");
@@ -65,13 +109,42 @@ function game() {
         }
     }
 }
+*/
+const playerScore = document.createElement('p');
+playerScore.classList.add('playerScore');
+const computerScore = document.createElement('p');
+computerScore.classList.add('computerScore');
+const score = document.createElement('p');
+score.classList.add('score');
+
+function game() {
+    if (playerPoints < 3 && computerPoints < 3) {
+        console.log("Player: " + playerPoints);
+        console.log("Computer: " + computerPoints);
+        playerScore.textContent = "Player: " + playerPoints;
+        roundResult.appendChild(playerScore);
+        computerScore.textContent = "Computer: " + computerPoints;
+        roundResult.appendChild(computerScore);
+    }
+    else if (playerPoints === 3) {
+        console.log("You Won!");
+        playerScore.textContent = "Player: " + playerPoints;
+        roundResult.appendChild(playerScore);
+        computerScore.textContent = "Computer: " + computerPoints;
+        roundResult.appendChild(computerScore);
+        score.textContent = "You Won!";
+        roundResult.appendChild(score);
+        }
+    else if (computerPoints === 3) {
+        console.log("You Lose, Better luck next time.");
+        playerScore.textContent = "Player: " + playerPoints;
+        roundResult.appendChild(playerScore);
+        computerScore.textContent = "Computer: " + computerPoints;
+        roundResult.appendChild(computerScore);
+        score.textContent = "You Lose, Better luck next time.";
+        roundResult.appendChild(score);
+    }
+}
 
 
-game();
-// play a match 
-// let player select option with prompt()
-// use singleRound() to compare
-// if someone wins give them a point 
-// if its a draw replay 
-// when someone reaches 3 they win 
-// print that player lost or won 
+
